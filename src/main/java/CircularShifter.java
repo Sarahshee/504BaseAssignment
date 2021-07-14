@@ -25,11 +25,11 @@ public class CircularShifter {
         int len = words.size();
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < len; ++i) {
-            sb.append(words.get(index));
-            ++index;
-            // Rotate to the beginning
+            // Post-increment passes value of index then increments, different from ++index
+            sb.append(words.get(index++));
+            // Rotate to the beginning if at the end of the line
             if(index == len) index = 0;
-            // Append a blank space if not at the end
+            // Only add blank space if not the last word of the line
             if(i + 1 < len) sb.append(" ");
         }
         return sb.toString();
