@@ -13,10 +13,10 @@ public class CircularShifter {
         // Going to move the first word to the end of the line repeatedly
         for (String line : lines) {
             // Get all the words in the line
-            String[] words = line.split(" ");
-            int numWords = words.length;
+            List<String> words = Arrays.asList(line.split(" "));
+            int numWords = words.size();
             for (int i = 0; i < numWords; ++i)
-                shifted.add(rotate(Arrays.asList(words), i));
+                shifted.add(rotate(words, i));
         }
         return shifted;
     }
@@ -25,10 +25,12 @@ public class CircularShifter {
         int len = words.size();
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < len; ++i) {
-            sb.append(words.get(index)).append(" ");
+            sb.append(words.get(index));
             ++index;
             // Rotate to the beginning
             if(index == len) index = 0;
+            // Append a blank space if not at the end
+            if(i + 1 < len) sb.append(" ");
         }
         return sb.toString();
     }
